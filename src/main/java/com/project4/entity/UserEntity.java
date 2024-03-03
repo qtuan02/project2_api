@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NamedQuery(name = "UserEntity.findByEmail", query = "select u from UserEntity u where u.email=:email")
+@NamedQuery(name = "UserEntity.findByPhone", query = "select u from UserEntity u where u.phone=:phone")
 @NamedQuery(name = "UserEntity.findByEmailOrPhone", query = "select u from UserEntity u where u.email=:username or u.phone=:username")
 
 @Data

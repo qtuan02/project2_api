@@ -46,10 +46,15 @@ public class UserService implements IUserService {
     public ResponseEntity<String> register(Map<String, String> requestMap) {
         try{
             if(CafeCheckDataJSON.checkDataRegister(requestMap)){
-                UserEntity user = userRepository.findByEmail(requestMap.get("email"));
-                if(Objects.isNull(user)){
-                    userRepository.save(cafeMapDataJSON.getUserFromMap(requestMap));
-                    return CafeUtil.getResponseEntity("Đăng kí thành công.", HttpStatus.OK);
+                UserEntity userByEmail = userRepository.findByEmail(requestMap.get("email"));
+                UserEntity userByPhone = userRepository.findByEmail(requestMap.get("phone"));
+                if(Objects.isNull(userByEmail)){
+                    if(Objects.isNull(userByPhone)){
+                        userRepository.save(cafeMapDataJSON.getUserFromMap(requestMap));
+                        return CafeUtil.getResponseEntity("Đăng kí thành công.", HttpStatus.OK);
+                    }else{
+                        return CafeUtil.getResponseEntity(CafeConstant.PHONE_EXIST, HttpStatus.BAD_REQUEST);
+                    }
                 }else{
                     return CafeUtil.getResponseEntity(CafeConstant.EMAIL_EXIST, HttpStatus.BAD_REQUEST);
                 }
@@ -65,6 +70,10 @@ public class UserService implements IUserService {
     @Override
     public ResponseEntity<String> login(Map<String, String> requestMap) {
         try{
+            UserEntity userChecUsername = userRepository.findByEmailOrPhone(requestMap.get("username"));
+            if(Objects.isNull(userChecUsername)){
+                return CafeUtil.getResponseEntity("Tài khoản không tồn tại!!!", HttpStatus.BAD_REQUEST);
+            }
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(requestMap.get("username"), requestMap.get("password")));
             if (auth.isAuthenticated()){
@@ -75,10 +84,8 @@ public class UserService implements IUserService {
                                     customerUsersDetailsService.getUser().getRole().getName()) + "\"}",
                             HttpStatus.OK);
                 }else{
-                    return CafeUtil.getResponseEntity("Tài khoản đang bị vô hiệu hóa!!!", HttpStatus.BAD_REQUEST);
+                    return CafeUtil.getResponseEntity("Tài khoản đã bị vô hiệu hóa!!!", HttpStatus.BAD_REQUEST);
                 }
-            }else{
-                return CafeUtil.getResponseEntity("Tài khoản không tồn tại!!!", HttpStatus.BAD_REQUEST);
             }
 
         }catch (Exception e){
