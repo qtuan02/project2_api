@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "RoleEntity.findByName", query = "select r from RoleEntity r where name=:name")
+
 @Data
 @Entity
 @AllArgsConstructor

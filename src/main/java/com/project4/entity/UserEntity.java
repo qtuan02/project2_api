@@ -10,6 +10,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "UserEntity.findByEmail", query = "select u from UserEntity u where u.email=:email")
+@NamedQuery(name = "UserEntity.findByEmailOrPhone", query = "select u from UserEntity u where u.email=:username or u.phone=:username")
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -40,7 +43,7 @@ public class UserEntity {
 
     private String address;
 
-    private boolean status;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
