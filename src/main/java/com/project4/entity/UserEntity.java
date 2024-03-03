@@ -29,6 +29,9 @@ public class UserEntity {
 
     private Timestamp birthday;
 
+    @Column(length = 11)
+    private String phone;
+
     @Column(length = 50)
     private String email;
 
