@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "CategoryEntity.updateCategory", query = "update CategoryEntity c set c.name=:name where c.id=:id")
+
+
 @Data
 @Entity
 @AllArgsConstructor

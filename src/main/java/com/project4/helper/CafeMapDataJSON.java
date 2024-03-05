@@ -1,6 +1,7 @@
 package com.project4.helper;
 
 import com.project4.dto.UserDto;
+import com.project4.entity.CategoryEntity;
 import com.project4.entity.UserEntity;
 import com.project4.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,11 @@ public class CafeMapDataJSON {
         user.setAddress(requestMap.get("address"));
         user.setBirthday(LocalDate.parse(requestMap.get("birthday")));
         return user;
+    }
+
+    public CategoryEntity getCategoryFromMap(Map<String, String> requestMap){
+        CategoryEntity category = new CategoryEntity();
+        category.setName(requestMap.get("name"));
+        return category;
     }
 }

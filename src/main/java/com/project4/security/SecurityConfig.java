@@ -33,7 +33,7 @@ public class SecurityConfig {
         http.cors(cor -> cor.configurationSource(
                 request -> new CorsConfiguration().applyPermitDefaultValues()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/user/login", "/user/register")
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/user/login", "/user/register", "/category/getCategories")
                         .permitAll().anyRequest().authenticated())
                 .exceptionHandling(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
