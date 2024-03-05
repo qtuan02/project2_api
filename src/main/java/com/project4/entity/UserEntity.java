@@ -6,13 +6,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "UserEntity.getUsers", query = "select new com.project4.dto.UserDto(u.id, u.firstName, u.lastName, u.birthday, u.phone, u.email, u.password, u.address, u.status, u.role.name) from UserEntity u where u.email <> 'huynhquoctuan200702@gmail.com'")
 @NamedQuery(name = "UserEntity.findByEmail", query = "select u from UserEntity u where u.email=:email")
 @NamedQuery(name = "UserEntity.findByPhone", query = "select u from UserEntity u where u.phone=:phone")
 @NamedQuery(name = "UserEntity.findByEmailOrPhone", query = "select u from UserEntity u where u.email=:username or u.phone=:username")
+@NamedQuery(name = "UserEntity.updateStatus", query = "update UserEntity u set u.status=:status where u.id=:id")
+@NamedQuery(name = "UserEntity.changePassword", query = "update UserEntity u set u.password=:newPassword where u.id=:id")
+@NamedQuery(name = "UserEntity.getUser", query = "select new com.project4.dto.ProfileDto(u.id, u.firstName, u.lastName, u.birthday, u.phone, u.email, u.address) from UserEntity u where u.id=:id")
+@NamedQuery(name = "UserEntity.updateProfileByUser", query = "update UserEntity u set u.firstName=:fName, u.lastName=:lName, u.birthday=:birthday, u.address=:address where u.id=:id")
+@NamedQuery(name = "UserEntity.changeRole", query = "update UserEntity u set u.role=:role where u.id=:id")
+
 
 @Data
 @Entity
@@ -31,7 +38,7 @@ public class UserEntity {
     @Column(length = 10)
     private String lastName;
 
-    private Timestamp birthday;
+    private LocalDate birthday;
 
     @Column(length = 11)
     private String phone;

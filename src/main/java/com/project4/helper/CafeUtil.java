@@ -16,7 +16,11 @@ public class CafeUtil {
         return new ResponseEntity<String>("{\"message\":\"" + responseMessage + "\"}", httpStatus);
     }
 
-    public static <T> ResponseEntity<List<T>> getResponseEntityList(ArrayList<T> responseMessage, HttpStatus httpStatus){
-        return new ResponseEntity<>(responseMessage, httpStatus);
+    public static <T> ResponseEntity<List<T>> getResponseEntityList(ArrayList<T> list, HttpStatus httpStatus){
+        return new ResponseEntity<>(list, httpStatus);
+    }
+
+    public static <T> ResponseEntity<T> getResponseEntityObject(T object, HttpStatus httpStatus){
+        return new ResponseEntity<>(object, httpStatus);
     }
 }
