@@ -42,9 +42,9 @@ public class ProductEntity {
 
     private LocalDateTime createAt;
 
-    private LocalDateTime modifyBy;
+    private String modifyBy;
 
-    private Timestamp modifyAt;
+    private LocalDateTime modifyAt;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
