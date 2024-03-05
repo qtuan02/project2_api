@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +40,9 @@ public class ProductEntity {
 
     private String createBy;
 
-    private Timestamp createAt;
+    private LocalDateTime createAt;
 
-    private String modifyBy;
+    private LocalDateTime modifyBy;
 
     private Timestamp modifyAt;
 
