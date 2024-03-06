@@ -13,4 +13,13 @@ public class CafeCheckDataJSON {
         }
         return false;
     }
+
+    public static boolean checkDataProduct(Map<String, String> requestMap){
+        if(requestMap.containsKey("quantity") && requestMap.containsKey("name")
+                && requestMap.containsKey("price") && requestMap.containsKey("description")
+                && requestMap.containsKey("category_id")){
+            return true;
+        }
+        return false;
+    }
 }
