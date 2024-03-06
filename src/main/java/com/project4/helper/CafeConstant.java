@@ -13,5 +13,6 @@ public class CafeConstant {
     public static final String DELETE_SUCCESS = "Xóa thành công.";
     public static final String CATEGORY_NOT_EXIST = "Danh mục không tồn tại!!!";
     public static final String PRODUCT_NOT_EXIST = "Sản phẩm không tồn tại!!!";
+    public static final String CART_NOT_EXIST = "Sản phẩm không tồn tại trong giỏ hàng!!!";
     public static final String URL_PATH_IMAGE = "public/images/";
 }

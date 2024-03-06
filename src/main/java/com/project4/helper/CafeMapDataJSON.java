@@ -1,6 +1,7 @@
 package com.project4.helper;
 
 import com.google.common.hash.Hashing;
+import com.project4.entity.CartEntity;
 import com.project4.entity.CategoryEntity;
 import com.project4.entity.ProductEntity;
 import com.project4.entity.UserEntity;
@@ -138,5 +139,23 @@ public class CafeMapDataJSON {
             return true;
         }
         return false;
+    }
+
+    public CartEntity getCartFromMap(UserEntity user, Map<String, String> requestMap){
+        CartEntity cart = new CartEntity();
+        ProductEntity product = productRepository.findById(Long.parseLong(requestMap.get("product_id"))).get();
+        int quantity = Integer.parseInt(requestMap.get("quantity"));
+        cart.setUserCart(user);
+        cart.setProductCart(product);
+        cart.setQuantity(quantity);
+        cart.setTotal((double) (quantity*product.getPrice()));
+        return cart;
+    }
+
+    public CartEntity getCartUpdateFromMap(Map<String, String> requestMap, CartEntity cart){
+        int quantity = Integer.parseInt(requestMap.get("quantity"));
+        cart.setQuantity(quantity);
+        cart.setTotal((double) (quantity*cart.getProductCart().getPrice()));
+        return cart;
     }
 }
